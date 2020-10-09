@@ -1,0 +1,29 @@
+<div class="container pt-5">
+    <div class="bg-light">
+    <h1 class="text-center text-info py-3">View Task</h1>
+        <div class="row">
+           <table class="table">
+               <thead class="font-clr">
+                <th class="pl-5">Name</th>
+                <th>Title</th>
+                <th>Duration</th>
+                <th>Description</th>
+                <th></th>
+               </thead>
+               <tbody>
+                    {{#each data}}
+                        <tr>
+                            <td class="pl-5">{{name}}</td>
+                            <td>{{title}}</td>
+                            <td>{{duration}}</td>
+                            <td>{{description}}</td>
+                <td><a href="/delete/{{_id}}" class="btn btn-delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                <a href="/edit/{{_id}}" class="btn btn-edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+               </td>
+                        </tr>
+                    {{/each}}
+               </tbody>
+           </table>
+        </div>
+    </div>
+</div>

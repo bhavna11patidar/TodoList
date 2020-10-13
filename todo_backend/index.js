@@ -139,7 +139,8 @@ app.get('/view', function (req, res) {
 app.get('/delete/:id',(req,res)=>{
     task.deleteOne({_id:req.params.id})
     .then(()=>{
-        res.redirect('/view');
+        //res.redirect('/view');
+        res.status(200).json({msg:"Data deleted Successfully"});
     })
     .catch((err)=>{
         console.log(err);
@@ -149,7 +150,29 @@ app.get('/delete/:id',(req,res)=>{
 app.get('/edit/:id',(req,res)=>{
     task.findOne({_id:req.params.id})
     .then(data=>{
-        res.render('Task',{Task:data});
+        //res.render('Task',{Task:data});
+        res.status(200).json(data);
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+})
+
+app.post('/update-task/',(req,res)=>{
+    Task.findOne({_id:req.body.id})
+    .then(data=>{
+        data.name=req.body.name,
+        data.title=req.body.title;
+        data.description=req.body.description;
+        data.duration=req.body.duration,
+        data.save()
+        .then(()=>{
+          //  res.redirect('/view-task');
+          res.status(200).json({msg:"Data Updated Successfully"});
+        })
+        .catch(err=>{
+            console.log(err);
+        })
     })
     .catch(err=>{
         console.log(err);
